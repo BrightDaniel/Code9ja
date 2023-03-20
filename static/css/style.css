@@ -1,0 +1,53 @@
+body {
+    background: #000;
+    color: #fff;
+} 
+
+.navbar-brand img {
+    width: auto;
+    height: 50px;
+}
+
+
+.offcanvas-header img {
+    width: auto;
+    height: 50px;
+}
+
+nav {
+    position: sticky !important;
+}
+
+.nav-item {
+    font-size: 20px;
+}
+
+
+
+ .action button {
+    background-image: linear-gradient(to right top, #cbb26a, #c9ae63, #c6ab5c, #c4a755, #c1a34e, #c2a551, #c4a654, #c5a857, #cab065, #cfb774, #d3bf82, #d8c690);
+    border:none !important; 
+    color: white;
+    border-radius:10px !important; 
+    padding:15px !important;
+    min-height:30px !important; 
+    min-width: 120px !important;
+} 
+
+
+ /* .carousel-item img {
+    background-image: url(../images/home.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 230px;
+    padding-bottom: 110px;
+    text-align: center;
+
+}  */
+
+
+.col i {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
