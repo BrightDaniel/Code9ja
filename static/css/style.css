@@ -1,8 +1,3 @@
-body {
-    background: #000;
-    color: #fff;
-} 
-
 .navbar-brand img {
     width: auto;
     height: 50px;
@@ -32,22 +27,66 @@ nav {
     padding:15px !important;
     min-height:30px !important; 
     min-width: 120px !important;
+    font-family: 'Trirong', serif;
 } 
 
 
- /* .carousel-item img {
-    background-image: url(../images/home.png);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-top: 230px;
-    padding-bottom: 110px;
-    text-align: center;
+  .carousel-item img {
+    background-position: center center !important;
+    /* background-repeat: no-repeat !important;
+    background-size: cover !important; */
+    /* height: 90vh !important; */
 
-}  */
+} 
 
 
-.col i {
-    font-size: 40px;
-    margin-bottom: 10px;
+.col i  {
+    margin: 20px;
+}
+
+.info {
+    margin-bottom: 20vh !important;
+}
+
+/* .think, .partners, .contact {
+    background-image: linear-gradient(to right top, #cbb26a, #c9ae63, #c6ab5c, #c4a755, #c1a34e, #c2a551, #c4a654, #c5a857, #cab065, #cfb774, #d3bf82, #d8c690);
+} */
+
+ .courses, .faq, .footer {
+    /* background: silver; */
+    background-image: linear-gradient(to right top, #cbb26a, #c9ae63, #c6ab5c, #c4a755, #c1a34e, #c2a551, #c4a654, #c5a857, #cab065, #cfb774, #d3bf82, #d8c690);
+}
+
+.sil, .info {
+    background: rgb(210, 207, 207);
+}
+
+
+.think, .partners, .faq, .contact{
+    margin-top: 30vh !important;
+    margin-bottom: 30vh !important;
+}
+ .think span {
+    /* margin-top: 100px !important;  */
+    font-family: Arial, Helvetica, sans-serif;
+    color: #c1a34e;
+    font-weight: bold;
+    
+} 
+
+.partners h2, .courses h2, .faq h2 {
+    margin-bottom: 10vh !important;
+}
+
+/* .btn-dark button {
+    width: 500px;
+    height: auto;
+} */
+
+.footer {
+    margin-top: 30vh !important;
+}
+
+.footer a {
+    text-decoration: none;
 }
