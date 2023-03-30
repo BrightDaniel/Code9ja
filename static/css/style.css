@@ -36,16 +36,20 @@ nav {
     /* background-repeat: no-repeat !important;
     background-size: cover !important; */
     /* height: 90vh !important; */
+    height: 90vh; 
+    width: auto; 
+    background-repeat: no-repeat;
+    background-size: cover;
 
 } 
 
 
 .col i  {
-    margin: 20px;
+    padding: 20px;
 }
 
 .info {
-    margin-bottom: 20vh !important;
+    padding-bottom: 20vh !important;
 }
 
 /* .think, .partners, .contact {
@@ -57,14 +61,17 @@ nav {
     background-image: linear-gradient(to right top, #cbb26a, #c9ae63, #c6ab5c, #c4a755, #c1a34e, #c2a551, #c4a654, #c5a857, #cab065, #cfb774, #d3bf82, #d8c690);
 }
 
-.sil, .info {
+.partners, .think, .info, .contact {
     background: rgb(210, 207, 207);
 }
 
 
-.think, .partners, .faq, .contact{
-    margin-top: 30vh !important;
-    margin-bottom: 30vh !important;
+
+
+
+.think, .courses, .partners, .faq, .contact{
+    padding-top: 10vh !important;
+    padding-bottom: 10vh !important;
 }
  .think span {
     /* margin-top: 100px !important;  */
@@ -75,7 +82,7 @@ nav {
 } 
 
 .partners h2, .courses h2, .faq h2 {
-    margin-bottom: 10vh !important;
+    padding-bottom: 10vh !important;
 }
 
 /* .btn-dark button {
@@ -84,9 +91,27 @@ nav {
 } */
 
 .footer {
-    margin-top: 30vh !important;
+    padding-top: 10vh !important;
 }
 
 .footer a {
     text-decoration: none;
 }
+
+
+/* MISSION PAGE */
+
+.bg-image {
+    background-image: url('/static/images/mission.png');
+     height: 70vh;
+    width: auto; 
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bg-image h1 {
+    color: #fff;
+}
+
+.testimonials-container {
+    height: 300
+}  
