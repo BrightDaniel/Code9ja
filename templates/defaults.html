@@ -18,9 +18,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sofia&family=Trirong&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
     
     <!-- Css link -->
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
 
 
@@ -36,7 +39,7 @@
 
 <body>
   <!-- Navbar start -->
-  <div class="container-xxl">
+
     <nav class="navbar navbar-dark bg-dark fixed-top">
         <div class="container-lg">
           <a class="navbar-brand" href="{{url_for('home_page')}}"><img src="/static/images/logo.png" alt="Code 9ja logo"></a>
@@ -79,8 +82,8 @@
           </div>
         </div>
       </nav>
-
       <!-- Navbar end -->
+      <div class="container-xxl">
       {% block content %}
     
       
@@ -134,8 +137,8 @@
       </section>
 
       <!-- Footer end -->
-      </div>
 
+  </div>
 
 
     <!-- scripts -->
@@ -147,6 +150,9 @@
 
     <!-- js script -->
     <script src="/static/js/index.js"></script>
+
+    <!-- jquery script -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </body>
 </html>
