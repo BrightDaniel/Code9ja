@@ -1,3 +1,5 @@
+
+// FUNCTION TO COUNT DOWN ACHIEVEMNTS IN THE COUNTER SECTION OF MISSION PAGE STARTS //
 function counter(element) {
     const count = parseInt(element.getAttribute("data-count"));
     const speed = Math.round(count / 200);
@@ -23,9 +25,11 @@ function counter(element) {
     }
   });
 
+  // FUNCTION TO COUNT DOWN ACHIEVEMNTS IN THE COUNTER SECTION OF MISSION PAGE ENDS //
 
- // Function to check if element is in viewport
 
+
+ // FUNCTION TO CHECK IF DIFFERENT SESSIONS ARE IN VIEWPORTS THEN PERFROM ANIMATIONS  STARTS //
  window.addEventListener('scroll', function() {
     const section = document.querySelector('.think');
     const sectionPosition = section.getBoundingClientRect().top;
@@ -38,9 +42,6 @@ function counter(element) {
     }
   });
   
-  
-
-//
 
 window.addEventListener('scroll', function() {
     const section = document.querySelector('.courses');
@@ -55,31 +56,80 @@ window.addEventListener('scroll', function() {
   });
 
 
+  window.addEventListener('scroll', function() {
+    const section = document.querySelector('.partners');
+    const sectionPosition = section.getBoundingClientRect().top;
+    const screenPosition = window.innerHeight / 1.5;
+  
+    if (sectionPosition < screenPosition) {
+      section.classList.add('animate__animated', 'animate__slideInLeft');
+    } else {
+      section.classList.remove('animate__animated', 'animate__slideInLeft');
+    }
+  });
+  
+
+  window.addEventListener('scroll', function() {
+    const section = document.querySelector('.faq');
+    const sectionPosition = section.getBoundingClientRect().top;
+    const screenPosition = window.innerHeight / 1.5;
+  
+    if (sectionPosition < screenPosition) {
+      section.classList.add('animate__animated', 'animate__slideInRight');
+    } else {
+      section.classList.remove('animate__animated', 'animate__slideInRight');
+    }
+  });
+  
+
+  window.addEventListener('scroll', function() {
+    const section = document.querySelector('.contact');
+    const sectionPosition = section.getBoundingClientRect().top;
+    const screenPosition = window.innerHeight / 1.5;
+  
+    if (sectionPosition < screenPosition) {
+      section.classList.add('animate__animated', 'animate__slideInLeft');
+    } else {
+      section.classList.remove('animate__animated', 'animate__slideInLeft');
+    }
+  });
+  
+ // FUNCTION TO CHECK IF DIFFERENT SESSIONS ARE IN VIEWPORTS THEN PERFROM ANIMATIONS  STARTS //
 
 
 
+// FUNCTION TO SEND MAIL VIA EMAIL JS
 
+  (function(){
+    emailjs.init('ij4GaCYFg6LQ5hbOU');
+ })();
 
+  function sendEmail(contactForm) {
+    emailjs.send("service_123v6yh","template_zgwwr1i", {
+       "from_name": contactForm.name.value,
+       "from_email": contactForm.email.value,
+       "subject": contactForm.subject.value,
+       "message": contactForm.message.value
+    })
+    .then(function(response) {
+       // Display success message
+       swal({
+          title: "Success!",
+          text: "Your message has been sent.",
+          icon: "success",
+       });
+       // Clear form fields
+       contactForm.reset();
+    }, function(error) {
+       // Display error message
+       swal({
+          title: "Oops...",
+          text: "Something went wrong. Please try again later.",
+          icon: "error",
+       });
+    });
+    return false; // Prevent page reload on submit
+ }
+ 
 
-// const slideRightElements = document.querySelectorAll('.slide-right');
-
-// function slideRight() {
-//   slideRightElements.forEach(slideRightElement => {
-//     if (isElementInViewport(slideRightElement)) {
-//       slideRightElement.classList.add('show');
-//     }
-//   });
-// }
-
-// function isElementInViewport(el) {
-//   const rect = el.getBoundingClientRect();
-//   return (
-//     rect.top >= 0 &&
-//     rect.left >= 0 &&
-//     rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-//     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-//   );
-// }
-
-// window.addEventListener('scroll', slideRight);
 

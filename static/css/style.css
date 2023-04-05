@@ -1,3 +1,5 @@
+/* GENERAL AND DEFAULT STLES FOR THE DEFAULTS.HTML PAGE STARTS */
+
 .navbar-brand img {
     width: auto;
     height: 50px;
@@ -30,19 +32,46 @@ nav {
     font-family: 'Trirong', serif;
 } 
 
+.footer {
+  padding-top: 10vh !important;
+}
 
-  .carousel-item img {
-    background-position: center center !important;
-    /* background-repeat: no-repeat !important;
-    background-size: cover !important; */
-    /* height: 90vh !important; */
-    height: 90vh; 
-    width: auto; 
-    background-repeat: no-repeat;
-    background-size: cover;
+.footer a {
+  text-decoration: none;
+}
+.footer {
+  background-image: linear-gradient(to right top, #cbb26a, #c9ae63, #c6ab5c, #c4a755, #c1a34e, #c2a551, #c4a654, #c5a857, #cab065, #cfb774, #d3bf82, #d8c690);
+}
 
+/* ANIMATIONS FOR THE INDEX AND MISSIONS PAGE */
+
+#think.visible, #courses.visible, .partners.visible, .faq.visible, .contact.visible {
+    opacity: 1;
+    transition: all 5s ease-in;
+    transform: translateX(0%);
+    
 } 
 
+/* GENERAL AND DEFAULT STLES FOR THE DEFAULTS.HTML PAGE ENDS */
+
+
+/* INDEX PAGE STYLES */
+
+
+
+.carousel-item img {
+  background-position: center center !important;
+  height: 90vh; 
+  width: auto; 
+  background-repeat: no-repeat;
+  background-size: cover;
+} 
+
+@media (max-width: 767px) {
+  .carousel-item img {
+  height: auto !important;
+  }
+  }
 
 .col i  {
     padding: 20px;
@@ -52,12 +81,8 @@ nav {
     padding-bottom: 20vh !important;
 }
 
-/* .think, .partners, .contact {
-    background-image: linear-gradient(to right top, #cbb26a, #c9ae63, #c6ab5c, #c4a755, #c1a34e, #c2a551, #c4a654, #c5a857, #cab065, #cfb774, #d3bf82, #d8c690);
-} */
 
- .courses, .faq, .footer {
-    /* background: silver; */
+ .courses, .faq .footer {
     background-image: linear-gradient(to right top, #cbb26a, #c9ae63, #c6ab5c, #c4a755, #c1a34e, #c2a551, #c4a654, #c5a857, #cab065, #cfb774, #d3bf82, #d8c690);
 }
 
@@ -66,41 +91,33 @@ nav {
 }
 
 
-
-
-
 .think, .courses, .partners, .faq, .contact{
     padding-top: 10vh !important;
     padding-bottom: 10vh !important;
 }
  .think span {
-    /* margin-top: 100px !important;  */
     font-family: Arial, Helvetica, sans-serif;
     color: #c1a34e;
     font-weight: bold;
     
 } 
 
+
 .partners h2, .courses h2, .faq h2, .testimonial h2, .hidden h2 {
     padding-bottom: 10vh !important;
 }
 
-/* .btn-dark button {
-    width: 500px;
-    height: auto;
-} */
-
-.footer {
-    padding-top: 10vh !important;
-}
-
-.footer a {
-    text-decoration: none;
-}
 
 
-/* MISSION PAGE */
 
+
+/* MISSION PAGE STYLES */
+
+
+
+
+
+/* HERO SESSION */
 .bg-image {
     background-image: url('/static/images/mission.png');
      height: 70vh;
@@ -113,17 +130,12 @@ nav {
 }
 
 
+/* TESTIMONIALS SESSION */
+
 .testimonial {
     background-color: #f2f2f2;
     padding: 50px 0;
   }
-  
-  /* .testimonial h2 {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 36px;
-    font-weight: bold;
-    color: #333;
-  } */
   
   .testimonial p {
     font-family: Helvetica, Arial, sans-serif;
@@ -177,11 +189,11 @@ nav {
   
   
   
+
+  /* COUNTER SESSION */
+
   .muse-section {
-    /* background-color: #f2f2f2; */
-    /* background-color: #cac8c8; */
     background-color: silver;
-    /* background-image: url('/static/images/darkened.png'); */
     padding: 80px 0;
   }
 
@@ -201,7 +213,7 @@ nav {
     font-size: 64px;
     font-weight: 700;
     line-height: 1;
-    margin-bottom: 40px; /* increased margin bottom */
+    margin-bottom: 40px;
     text-align: center;
   }
 
@@ -225,32 +237,3 @@ nav {
 
 
 
-  /* Animations */
-
-   /* #think {
-    opacity: 0;
-    transform: translateX(-100%);
-  } 
-   */
-   #think.visible {
-    opacity: 1;
-    transition: all 5s ease-in;
-    transform: translateX(0%);
-    
-  } 
-  
-
-  /*  */
-  /* .slide-right {
-    opacity: 0;
-    /* transform: translateX(50px); 
-    transition: transform 1s ease-out, opacity 1s ease-out;
-  } */
-  
-  #courses.visible  {
-    opacity: 1;
-    transition: all 5s ease-in;
-    transform: translateX(0%);
-  }
-  
-  

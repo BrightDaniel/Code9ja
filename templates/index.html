@@ -89,23 +89,6 @@
 
 
 <!-- Why us section or think section starts -->
-  <!-- <section class="think">
-
-  <div class="row text-center h-100 w-100 row-cols-1 row-cols-lg-2">
-    <div class="col">
-      <h2 class="h1-responsive font-weight-bold text-center my-4">Why you suppose learn from us?</h2>
-
-      <div>
-        <p>
-        Many people want learn how to code sotey even if dem wake dem from sleep to write code, dem go run am quick quick. But the thing be say to learn am na wahala. No be say places no dey to learn from oo, but sometimes to understand wetin dem dey teach na wahala. <span>We don solve this problem for you</span> We dey here for you to teach you code sotey you go understand all the important things wey you need to know about am. And also, you go learn wetin you need to build better projects, plus seff, you go fit begin apply for companies to work with them. All this things wey we go teach you, na for language wey you no need dictionary to understand. <span>Na for our pidgin language </span> 
-      </p>
-      </div>
-
-    </div>
-    <div class="col"> <img src="/static/images/why_us.jpg" class="card-img-top" alt=""> </div>
-  </div>
-
-</section> -->
 
 <section id="think" class="think">
   <div class="row text-center h-100 w-100 row-cols-1 row-cols-lg-2">
@@ -123,11 +106,13 @@
   </div>
 </section>
 
-
-
 <!-- why us / think section ends -->
 
+
+
 <!-- Courses section -->
+
+
  <!-- <section class="container-xxl text-center courses" >
     <h2 class="h1-responsive font-weight-bold text-center my-4">Our Courses Make Sense</h2>
 
@@ -224,7 +209,7 @@
   <!-- Courses section ends -->
 
 <!-- Partners section starts -->
-  <section class="container-xxl text-center partners">
+  <section id="partners" class="container-xxl text-center partners">
     
     <h2 class="h1-responsive font-weight-bold text-center">People wey join hand with us to give you this better package</h2>
 
@@ -246,7 +231,7 @@
 <!-- Partners section ends -->
 
 <!-- Faq section starts -->
-<section class="container-xxl text-center  faq">
+<section id="faq" class="container-xxl text-center  faq">
   <h2 class="h1-responsive font-weight-bold text-center my-4">Some questions wey you fit get for mind</h2>
 
   <div class="row text-center h-100 w-100 row-cols-1 row-cols-lg-2 mt-5 ">
@@ -356,7 +341,7 @@
 
       <!--Grid column-->
       <div class="col-md-9 mb-md-0 mb-5">
-          <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+          <form id="contact-form" name="contact-form">
 
               <!--Grid row-->
               <div class="row">
@@ -411,10 +396,11 @@
           </form>
 
           <div class="text-center text-md-left">
-              <a class="action"> <button class="w-100"> Send </button></a>
+            <a class="action" onclick="sendEmail(document.getElementById('contact-form'))"> <button class="w-100"> Send </button></a>
+
           </div>
           <div class="status"></div>
-      </div>
+        </div>
       <!--Grid column-->
 
       <!--Grid column-->
