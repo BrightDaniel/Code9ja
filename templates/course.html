@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block title %} Code 9ja - Learn about{% endblock %}
+
+{% block keywords %}Keywords specific to this page{% endblock %}
+
+{% block description %}Description specific to this page{% endblock %}
+
+{% block author %}Author Name{% endblock %}
+
+{% block content %}
+
+  <div class="inner-banner">
+    <section class="w3l-breadcrumb text-left">
+      <div class="container">
+        <ul class="breadcrumbs-custom-path">
+          <li><a href="{{ url_for('index') }}">Home</a></li>
+          <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span> {{course.title}}</li>
+        </ul>
+
+      
+      </div>
+ 
+    </section>
+  </div>
+  <!-- about page about section -->
+
+  <section class="w3l-index3" id="about1">
+    <div class="midd-w3 py-5">
+      <div class="container py-lg-5 py-md-3">
+        <div class="row">
+          <!-- <div class="col-lg-6 mb-lg-0 mb-md-5 mb-4">
+            <img src="/static/images/ab1.jpg" alt="" class="radius-image-full img-fluid">
+          </div> -->
+          <div class="col-lg-12 pl-lg-5 ">
+            <div class="header-title">
+               <span class="sub-title">Overview</span> 
+              <h3 class="hny-title text-left">{{course.title}}</h3>
+          </div>
+
+          <section class="w3l-skills" id="skills">
+            <div class="midd-w3 py-5">
+              <div class="container py-lg-5 py-md-3">
+                <div class="row">
+                  <div class="col-lg-6 pr-lg-5 mb-lg-0 mb-5">
+                    <img src="{{ url_for('static', filename='uploads/' + course.cover_photo) }}" alt="" class="radius-image-full img-fluid">
+                  </div>
+        
+                  <div class="col-lg-6 about-right-faq align-self mb-lg-0 mb-sm-5 mb-4 pr-lg-5">
+                    <div class="header-title mb-md-5 mb-4">
+                      <span class="sub-title">This course go soon start</span>
+         
+                  </div>
+                    <div class="two-grids mt-md-0 mt-md-5 mt-4">
+                        <div class="grids_info">
+                            <h4>Deadline to apply</h4>
+                            <a href="#" class="btn btn-style btn-primary mt-sm-5 mt-4">{{course.deadline_date}} </a>
+                            
+                        </div>
+                   
+                        <div class="grids_info">
+                            <h4>Course Start Date</h4>
+                            <a href="#" class="btn btn-style btn-primary mt-sm-5 mt-4">{{course.start_date}} </a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+              </div>
+        
+            </div>
+          </section>
+           
+          <div class="blog-content">
+
+         
+            <p class="mt-3 "> 
+              {{ course.course_content|safe }}</p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /bottom-grids-->
+  <section class="w3l-skills" id="skills">
+    <div class="midd-w3 py-5">
+      <div class="container py-lg-5 py-md-3">
+        <div class="row">
+
+          <div class="col-lg-12 about-right-faq align-self mb-lg-0 mb-sm-5 mb-4 pr-lg-5">
+            <div class="header-title mb-md-5 mb-4">
+              <span class="sub-title">This course go soon start</span>
+ 
+          </div>
+            <div class="two-grids mt-md-0 mt-md-5 mt-4">
+              <div class="grids_info">
+                <h4>Price</h4>
+                <a href="#" class="btn btn-style btn-primary mt-sm-5 mt-4">{{course.cost}} </a>
+                
+            </div>
+            <div class="grids_info">
+              <h4>Who fit take the course</h4>
+              <a href="#" class="btn btn-style btn-primary mt-sm-5 mt-4">{{course.eligibility}} </a>
+              
+          </div>
+            </div>
+        </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- /form-25-section -->
+  <section class="w3l-form-25-section" id="subscribe">
+    <!-- /form-25-section -->
+    <div class="form-25-mian">
+      <div class="container py-5">
+        <div class="row subscription-grids py-5">
+          <div class="col-lg-7 subscription-left forms-25-info">
+            <div class="header-title">
+              <h3 class="p-0">Na you be our next student
+              </h3>
+            </div>
+          </div>
+          <div class="col-lg-5 subscription-right pl-lg-5 mt-lg-0 mt-4 text-lg-right">
+            {% if course.deadline_date < current_date %}
+    <a href="{{ url_for('registration_closed') }}" class="btn btn-primary">Deadline for registration of this course is over. Please wait for the next batch.</a>
+{% else %}
+    {% if current_user.is_authenticated %}
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Apply Now</a>
+    {% else %}
+        <a href="{{ url_for('register_page') }}" class="btn btn-primary">Apply Now</a>
+    {% endif %}
+{% endif %}
+
+          </div>
+        </div>
+      </div>
+  </section>
+  <!-- //form-25-section -->
+
+
+
+
+
+    
+
+  {% endblock %}

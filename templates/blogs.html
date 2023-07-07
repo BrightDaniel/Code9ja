@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %} Code 9ja - Learn coding in Nigerian Pidgin {% endblock %}
+
+{% block keywords %}Keywords specific to this page{% endblock %}
+
+{% block description %}Description specific to this page{% endblock %}
+
+{% block author %}Author Name{% endblock %}
+
+{% block content %}
+
+  <div class="inner-banner">
+    <section class="w3l-breadcrumb">
+      <div class="container">
+        <ul class="breadcrumbs-custom-path">
+          <li><a href="{{ url_for('index') }}">Home</a></li>
+          <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span> Blogs</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+  <!-- about page about section -->
+  <!--/courses-->
+  <section class="w3l-blogpost-content py-5">
+    <div class="container py-md-5">
+        <div class="header-title mb-md-5 mt-4">
+            <span class="sub-title">Latest Posts</span>
+            <h3 class="hny-title text-left">Tori as E dey hot</h3>
+        </div>
+        <!-- <div class="row">
+          {% if blogs %}
+          {% for blog in blogs %}
+            <div class="col-lg-4 col-md-6 item">
+                <div class="card">
+                    <div class="card-header p-0 position-relative">
+                        <a href="blog-single.html">
+                            <img class="card-img-bottom d-block radius-image-full" src="{{ url_for('static', filename='uploads/' + blog.cover_photo) }}" alt="{{ blog.title }}">
+                        </a>
+                    </div>
+                    <div class="card-body blog-details">
+                        <a href="blog-single.html" class="blog-desc">{{ blog.title }}
+                        </a>
+                        <div class="align-items-center">
+                            <ul class="blog-meta">
+                                <li>
+                                    <a href="#">{{ blog.author }}</a> 
+                                </li>
+                                <li class="meta-item blog-lesson">
+                                    <span class="meta-value"> {{ blog.date_posted.strftime("%Y-%m-%d") }} </span>. <span class="meta-value ml-2"><span class="fa fa-clock-o"></span>{{ blog.duration }}min</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="readhny-btm text-center mx-auto mt-md-4">
+                <a class="btn btn-primary btn-style mt-md-5 mt-4 text-light" >No new gist for now oo, but no worry, we go get some gossip for you later <span
+                    class="fa fa-chevron-right ml-2" aria-hidden="true"></span></a>
+                    </div>
+            {% endif %}
+            
+
+            <div class="readhny-btm text-center mx-auto mt-md-4">
+                <a class="btn btn-primary btn-style mt-md-5 mt-4" href="{{ url_for('blogs_page') }}">Read More <span
+                        class="fa fa-chevron-right ml-2" aria-hidden="true"></span></a>
+            </div>
+        </div> -->
+
+        <div class="row">
+          {% if blogs %}
+              {% for blog in blogs %}
+              <div class="col-lg-4 col-md-6 item">
+                  <div class="card">
+                      <div class="card-header p-0 position-relative">
+                          <a href="{{ url_for('blog', slug=blog.slug) }}">
+                              <img class="card-img-bottom d-block radius-image-full" src="{{ url_for('static', filename='uploads/' + blog.cover_photo) }}" alt="{{ blog.title }}">
+                          </a>
+                      </div>
+                      <div class="card-body blog-details">
+                          <a href="{{ url_for('blog', slug=blog.slug) }}" class="blog-desc">{{ blog.title }}</a>
+                          <div class="align-items-center">
+                              <ul class="blog-meta">
+                                  <li>
+                                      <a href="#">{{ blog.author }}</a>
+                                  </li>
+                                  <li class="meta-item blog-lesson">
+                                      <span class="meta-value">{{ blog.date_posted.strftime("%Y-%m-%d") }}</span>. <span class="meta-value ml-2"><span class="fa fa-clock-o"></span>{{ blog.duration }} min</span>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              {% endfor %}
+          {% else %}
+          <div class="readhny-btm text-center mx-auto mt-md-4">
+              <a class="btn btn-primary btn-style mt-md-5 mt-4 text-light">No new gist for now oo, but no worry, we go get some gossip for you later <span class="fa fa-chevron-right ml-2" aria-hidden="true"></span></a>
+          </div>
+          {% endif %}
+      
+          <div class="readhny-btm text-center mx-auto mt-md-4">
+              <a class="btn btn-primary btn-style mt-md-5 mt-4" href="{{ url_for('blogs_page') }}">Read More <span class="fa fa-chevron-right ml-2" aria-hidden="true"></span></a>
+          </div>
+      </div>
+      
+    </div>
+</section>
+  <!--//courses-->
+
+
+  
+  {% endblock %}

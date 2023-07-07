@@ -1,0 +1,46 @@
+{% extends 'dashboard_base.html' %}
+
+{% block title %}
+    Admin Dashboard || Edit Blog
+{% endblock %}
+
+{% block content %}
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1>Edit Blog</h1>
+                <form method="POST" action="{{ url_for('edit_blog', blog_id=blog.id) }}" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" name="title" value="{{ blog.title }}" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Author:</label>
+                        <input type="text" name="author" value="{{ blog.author }}" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Date Posted:</label>
+                        <input type="date" name="date_posted" value="{{ blog.date_posted.strftime("%Y-%m-%d") }}" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Slug:</label>
+                        <input type="text" name="slug" value="{{ blog.slug }}" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Duration:</label>
+                        <input type="text" name="duration" value="{{ blog.duration }}" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Cover Photo:</label>
+                        <input type="file" name="cover_photo" class="form-control-file" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label>Content:</label>
+                        <textarea id="blog-content" name="content" class="form-control">{{ blog.content }}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Blog</button>
+                </form>
+            </div>
+        </main>
+    </div>
+{% endblock %}

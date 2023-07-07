@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %} Code 9ja - Learn about{% endblock %}
+
+{% block keywords %}Keywords specific to this page{% endblock %}
+
+{% block description %}Description specific to this page{% endblock %}
+
+{% block author %}Author Name{% endblock %}
+
+{% block content %}
+
+    <div class="inner-banner">
+        <section class="w3l-breadcrumb">
+            <div class="container">
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span> Contact</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <!-- about page about section -->
+    <!-- contact1 -->
+    <section class="w3l-contact-1 py-5" id="contact">
+        <div class="contacts-9 py-lg-5 py-md-4">
+            <div class="container">
+                <div class="d-grid contact-view mb-5 pb-lg-5">
+                            <div class="header-title mb-md-5 mt-4">
+                                    <span class="sub-title">Contact Us</span>
+                                    <h3 class="hny-title text-left">Fill out the form.</h3>
+                                </div>
+                            </div>
+                            <form action="{{ url_for('submit_form') }}" method="post">
+                                <div class="twice-two">
+                                    <input type="text" class="form-control" name="name" id="name"
+                                        placeholder="Name" required="">
+                                    <input type="email" class="form-control" name="email" id="email"
+                                        placeholder="Email" required="">
+                                </div>
+                                <div class="twice">
+                                    <input type="text" class="form-control" name="subject" id="subject"
+                                        placeholder="Subject" required="">
+                                </div>
+                                <textarea name="message" class="form-control" id="message" placeholder="Message"
+                                    required=""></textarea>
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-primary btn-style mt-4">Send Message</button>
+                                </div>
+                            </form>
+                  
+    
+
+            </div>
+            </div>
+    </section>
+    <!-- /contact1 -->
+
+
+    {% endblock %}

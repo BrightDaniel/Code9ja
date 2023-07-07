@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %} Code 9ja - Learn coding in Nigerian Pidgin {% endblock %}
+
+{% block keywords %}Keywords specific to this page{% endblock %}
+
+{% block description %}Description specific to this page{% endblock %}
+
+{% block author %}Author Name{% endblock %}
+
+{% block content %}
+
+  <div class="inner-banner">
+    <section class="w3l-breadcrumb">
+      <div class="container">
+        <ul class="breadcrumbs-custom-path">
+          <li><a href="{{ url_for('index') }}">Home</a></li>
+          <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span> Courses</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+  <!-- about page about section -->
+  <!--/courses-->
+  <section class="w3l-blogpost-content w3l-courses py-5">
+    <div class="container py-md-5">
+      <div class="header-title mb-md-5 mb-4">
+        <span class="sub-title">Top Courses</span>
+        <h3 class="hny-title text-left">Our Courses Make Sense</h3>
+      </div>
+      <div class="row">
+        {% if courses %}
+        {% for course in courses %}
+    <div class="col-lg-4 col-md-6 item">
+        <div class="card">
+          <div class="card-header p-0 position-relative">
+            <a href="#">
+                <img class="card-img-bottom d-block radius-image-full" src="{{ url_for('static', filename='uploads/' + course.cover_photo) }}" alt="{{ course.title }}">
+            </a>
+        </div>
+        
+            <div class="card-body blog-details">
+                <p class="price-review">₦{{ course.cost }}</p>
+                <a href="{{ url_for('course_post', slug=course.slug) }}" class="blog-desc mt-2">{{ course.title }}</a>
+                <div class="course-meta mt-1">
+                    <div class="meta-item course-lesson">
+                        <span class="fa fa-file-code-o"></span>
+                        <span class="meta-value"> {{ course.duration }} Months </span>
+                    </div>
+                    <div class="meta-item course-students">
+                        <span class="fa fa-user-o"></span>
+                        <span class="meta-value"> {{ course.eligibility }} </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% else %}
+<div class="readhny-btm text-center mx-auto mt-md-4">
+<a class="btn btn-primary btn-style mt-md-5 mt-4 text-light" >No course dey for Now, We dey take our time to give you better package <span
+    class="fa fa-chevron-right ml-2" aria-hidden="true"></span></a>
+    </div>
+{% endif %}
+
+
+      </div>
+      <div class="course-button mt-lg-4 text-center">
+      <a href="contact.html" class="btn btn-style btn-primary pt-lg-3 mt-sm-5 mt-4">See More <span
+          class="fa fa-chevron-right ml-2" aria-hidden="true"></span></a>
+        </div>
+    </div>
+  </section>
+  <!--//courses-->
+
+
+  
+  {% endblock %}

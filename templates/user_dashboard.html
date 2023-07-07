@@ -1,0 +1,14 @@
+<h1>Welcome, {{ user.first_name }}!</h1>
+
+{% if registered_courses %}
+    <h3>Your Registered Courses:</h3>
+    <ul>
+    {% for course in registered_courses %}
+        <li>{{ course.title }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No courses registered yet. <a href="/courses">Go to courses</a></p>
+{% endif %}
+
+<a href="/user-logout">Logout</a>

@@ -1,0 +1,65 @@
+
+{% extends 'dashboard_base.html' %}
+
+{% block title %}
+
+Admin Dashboard || Home
+
+{% endblock %}
+
+{% block content %}
+
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+
+<form method="POST" action="/admin-dashboard/add-course" enctype="multipart/form-data">
+    <div class="form-group">
+        <label>Title</label>
+        <input type="text" name="title" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label>Cost</label>
+        <input type="text" name="cost" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label>Eligibility</label>
+        <input type="text" name="eligibility" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label>Duration</label>
+        <input type="text" name="duration" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label>Slug</label>
+        <input type="text" name="slug" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label>Start Date</label>
+        <input type="date" name="start_date" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Deadline Date</label>
+        <input type="date" name="deadline_date" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Cover Photo</label>
+        <input type="file" name="cover_photo" class="form-control-file" accept="image/*" required>
+    </div>
+
+
+    <div class="form-group">
+        <label>Course Content</label>
+        <textarea id="course-content" name="course_content" class="form-control" req></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+</div>
+</main>
+
+
+{% endblock  %}

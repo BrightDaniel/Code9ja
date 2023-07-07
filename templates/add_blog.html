@@ -1,0 +1,42 @@
+{% extends 'dashboard_base.html' %}
+
+{% block title %}
+    Admin Dashboard || Add Blog
+{% endblock %}
+
+{% block content %}
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1>Add Blog</h1>
+                <form method="POST" action="{{ url_for('add_blog') }}" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" name="title" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Author:</label>
+                        <input type="text" name="author" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Slug:</label>
+                        <input type="text" name="slug" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Duration:</label>
+                        <input type="text" name="duration" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Cover Photo:</label>
+                        <input type="file" name="cover_photo" class="form-control-file" accept="image/*" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Content:</label>
+                        <textarea id="blog-content" name="content" class="form-control"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Blog</button>
+                </form>
+            </div>
+        </main>
+    </div>
+{% endblock %}
