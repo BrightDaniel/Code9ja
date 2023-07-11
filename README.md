@@ -1,6 +1,7 @@
 # Code9ja E-Learning Platform
 
-![banner](https://github.com/BrightDaniel/Code9ja/assets/107191784/79c4078b-1f5a-42f9-8800-0e72ef22d9ea)
+![banner](https://github.com/BrightDaniel/Code9ja/assets/107191784/7154f600-8019-447b-acb8-07a54661e863)
+
 
 
 Code9ja is an e-learning platform designed to provide users with an opportunity to learn coding and other tech-related courses in Nigerian Pidgin. The platform offers a wide range of courses, blog posts, and a user-friendly interface to enhance the learning experience. With Code9ja, users can apply for courses, track their application status, access the latest tech-related blog posts, and interact with the admin through the contact page.
@@ -135,32 +136,35 @@ Here are some screenshots of key pages within the Code9ja platform:
 
 - Homepage
 
-![homepage](https://github.com/BrightDaniel/Code9ja/assets/107191784/82bd1c93-9edf-4579-8158-fe1cb6d0c9e2)
+![homepage](https://github.com/BrightDaniel/Code9ja/assets/107191784/2f2704c7-457f-465b-a0eb-68d371ec82e0)
 
 
 - User Dashboard
 
-![user dashboard](https://github.com/BrightDaniel/Code9ja/assets/107191784/df10cf0e-7a34-4970-ac64-36dc849a45ec)
+![user dashboard](https://github.com/BrightDaniel/Code9ja/assets/107191784/775a5cc8-c419-4295-a3cd-ab34c16594dd)
+
 
 
 - Admin Dashboard
 
-![admin dashboard](https://github.com/BrightDaniel/Code9ja/assets/107191784/12dfde9d-af1e-417e-8917-8d11b7af7821)
+![admin dashboard](https://github.com/BrightDaniel/Code9ja/assets/107191784/df03b55b-04cc-4374-a3f2-33df5868d93d)
+
 
 
 - Course Page
 
-![courses](https://github.com/BrightDaniel/Code9ja/assets/107191784/bd2db573-e175-4fca-952c-886175806041)
+![courses](https://github.com/BrightDaniel/Code9ja/assets/107191784/57c09ec8-5da2-4a22-926c-a1d401964632)
 
 
 - Blog Page
 
-![blog](https://github.com/BrightDaniel/Code9ja/assets/107191784/fa7b4e8f-5744-4f70-ab98-8e882c7f3da4)
+![blog](https://github.com/BrightDaniel/Code9ja/assets/107191784/c6676658-bb44-433d-92df-7aed7bc42cba)
 
 
 - Contact Page
 
-![contact page](https://github.com/BrightDaniel/Code9ja/assets/107191784/6010d69a-69ea-4a22-9562-37e4dc75817b)
+![contact page](https://github.com/BrightDaniel/Code9ja/assets/107191784/29644b26-c537-4fa8-b936-5c574f906a22)
+
 
 
 ## Authors and Credits
