@@ -1,5 +1,8 @@
 # Code9ja E-Learning Platform
 
+![banner](https://github.com/BrightDaniel/Code9ja/assets/107191784/79c4078b-1f5a-42f9-8800-0e72ef22d9ea)
+
+
 Code9ja is an e-learning platform designed to provide users with an opportunity to learn coding and other tech-related courses in Nigerian Pidgin. The platform offers a wide range of courses, blog posts, and a user-friendly interface to enhance the learning experience. With Code9ja, users can apply for courses, track their application status, access the latest tech-related blog posts, and interact with the admin through the contact page.
 
 ## Features
