@@ -51,8 +51,24 @@ def allowed_file(filename):
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 #db connection
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_URI')
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_URI')
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+
+# Retrieve the DB_URI from the environment variable
+uri = os.getenv('DB_URI')
+
+# Modify the URI if it starts with "postgres://"
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+
+# Set the modified URI in the Flask app's configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+
+
+
 
 
 db = SQLAlchemy(app)
