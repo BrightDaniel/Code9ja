@@ -14,7 +14,11 @@ import pycountry
 from flask_login import LoginManager, UserMixin, login_user, current_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 
-
+# import random
+# import time
+# from sqlalchemy import inspect
+# from flask import jsonify
+# import json
 
 
 ## ----- IMPORT ENDS ----- ##
@@ -66,7 +70,7 @@ admin_email = os.getenv('ADMIN_EMAIL')
 admin_password = os.getenv('ADMIN_PASSWORD')
 
 mail = Mail(app)
-
+recipient = os.environ.get("MAIL_USERNAME")
 
 
 
@@ -80,12 +84,11 @@ mail = Mail(app)
 ## ----- DATABASE STARTS ----- ##
 
 
-
-registration_table = db.Table('registration',
+registration_table = db.Table(
+    'registration',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
     db.Column('course_id', db.Integer, db.ForeignKey('course.id'), primary_key=True)
 )
-
 
 class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -99,6 +102,20 @@ class Admin(db.Model):
         return bcrypt.check_password_hash(self.password, password)
 
 
+# class Course(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     title = db.Column(db.String(255), nullable=False)
+#     cost = db.Column(db.Float, nullable=False)
+#     eligibility = db.Column(db.String(255), nullable=False)
+#     duration = db.Column(db.Integer, nullable=False)
+#     slug = db.Column(db.String(255), unique=True, nullable=False)
+#     cover_photo = db.Column(db.String(255), nullable=False)
+#     course_content = db.Column(db.Text, nullable=False)
+#     start_date = db.Column(db.Date, nullable=True)
+#     deadline_date = db.Column(db.Date, nullable=True)
+#     quizzes = db.relationship('Quiz', backref='course', lazy=True)
+#     applications = db.relationship('Application', backref='course', lazy='dynamic')
+    
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
@@ -110,7 +127,25 @@ class Course(db.Model):
     course_content = db.Column(db.Text, nullable=False)
     start_date = db.Column(db.Date, nullable=True)
     deadline_date = db.Column(db.Date, nullable=True)
-    
+    quizzes = db.relationship('Quiz', backref='course', lazy=True)
+    applications = db.relationship('Application', backref='course', lazy='dynamic', cascade='all, delete-orphan')
+
+class Quiz(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
+    questions = db.relationship('Question', backref='quiz', lazy=True)
+
+class Question(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'), nullable=False)
+    content = db.Column(db.String(255), nullable=False)
+    options = db.relationship('Option', backref='question', lazy=True)
+
+class Option(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    question_id = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
+    content = db.Column(db.String(255), nullable=False)
+    is_correct = db.Column(db.Boolean, default=False)
 
 
 class Blog(db.Model):
@@ -123,6 +158,24 @@ class Blog(db.Model):
     cover_photo = db.Column(db.String(255), nullable=False)
     content = db.Column(db.Text, nullable=False)
     
+
+
+# class User(db.Model, UserMixin):
+#     id = db.Column(db.Integer, primary_key=True)
+#     first_name = db.Column(db.String(255), nullable=False)
+#     last_name = db.Column(db.String(255), nullable=False)
+#     email = db.Column(db.String(255), unique=True, nullable=False)
+#     password_hash = db.Column(db.String(255), nullable=False)
+#     country = db.Column(db.String(255), nullable=False)
+#     dob = db.Column(db.Date, nullable=False)
+#     gender = db.Column(db.String(10), nullable=False)
+#     registered_courses = db.relationship('Course', secondary=registration_table, backref=db.backref('registered_users', lazy='dynamic'))
+
+#     def set_password(self, password):
+#         self.password_hash = generate_password_hash(password)
+
+#     def check_password(self, password):
+#         return check_password_hash(self.password_hash, password)
 
 
 class User(db.Model, UserMixin):
@@ -142,7 +195,33 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+# class Application(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+#     course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
+#     phone = db.Column(db.String(20), nullable=False)
+#     country = db.Column(db.String(100), nullable=False)
+#     state = db.Column(db.String(100), nullable=False)
+#     education = db.Column(db.String(100), nullable=False)
+#     skills = db.Column(db.String(100), nullable=False)
+#     time = db.Column(db.Integer, nullable=False)
+#     motivation = db.Column(db.Text, nullable=False)
+#     user = db.relationship('User', backref='applications')
+#     course = db.relationship('Course', backref='applications')
 
+class Application(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
+    phone = db.Column(db.String(20), nullable=False)
+    country = db.Column(db.String(100), nullable=False)
+    state = db.Column(db.String(100), nullable=False)
+    education = db.Column(db.String(100), nullable=False)
+    skills = db.Column(db.String(100), nullable=False)
+    time = db.Column(db.Integer, nullable=False)
+    motivation = db.Column(db.Text, nullable=False)
+    user = db.relationship('User', backref='applications')
+    status = db.Column(db.String(20), nullable=False)
 
 
 ## ----- DATABASE ENDS ----- ##
@@ -176,7 +255,6 @@ def submit_form():
     subject = request.form.get('subject')
     message = request.form.get('message')
 
-    recipient = os.environ.get("MAIL_USERNAME")
 
     msg = Message('New Form Submission', sender=email, recipients=[recipient])
     msg.body = f"Name: {name}\nEmail: {email}\nSubject: {subject}\nMessage: {message}"
@@ -265,8 +343,15 @@ def login_page():
 def dashboard():
     user = current_user
     registered_courses = user.registered_courses
-    return render_template('user_dashboard.html', user=user, registered_courses=registered_courses)
+    applications = user.applications
 
+    # Check if the application deadline has passed and update the status accordingly
+    for application in applications:
+        if application.course.deadline_date < datetime.now().date():
+            application.status = 'Cancelled'
+    db.session.commit()
+
+    return render_template('user_dashboard.html', user=user, registered_courses=registered_courses, applications=applications, datetime=datetime)
 
 
 
@@ -279,11 +364,6 @@ def user_logout():
     return redirect('/login')
 
 
-
-# @app.route('/register')
-# def register_page():
-#     countries = list(pycountry.countries)
-#     return render_template('register.html', countries=countries)
 
 
 @app.route('/terms')
@@ -310,7 +390,7 @@ def admin_login_page():
 @app.route('/admin-dashboard')
 def admin_dashboard():
     if 'admin' in session:
-        email = admin_email  # Change this line to retrieve the logged-in admin's email from the database
+        email = admin_email  
         return render_template('admin_dashboard.html', email=email)
     else:
         return redirect('/admin-login')
@@ -512,6 +592,7 @@ def delete_blog(blog_id):
 
 
 
+
 @app.route('/upload_image', methods=['POST'])
 def upload_image():
     if 'file' not in request.files:
@@ -554,11 +635,414 @@ def course_post(slug):
     else:
         # flash('Course not found.', 'error')
         return redirect('/courses')
+    
+
+@app.route('/admin-dashboard/add-quiz')
+def add_quiz():
+    if 'admin' in session:
+        courses = Course.query.all()
+        return render_template('add_quiz.html', courses=courses)
+    else:
+        return redirect('/admin-login')
 
 
-@app.route('/apply')
-def apply_now():
-    return render_template('apply_now.html')
+
+@app.route('/admin-dashboard/create-quiz/<int:course_id>')
+def create_quiz(course_id):
+    if 'admin' in session:
+        course = Course.query.get(course_id)
+        return render_template('create_quiz.html', course=course)
+    else:
+        return redirect('/admin-login')
+
+@app.route('/admin-dashboard/save-quiz/<int:course_id>', methods=['POST'])
+def save_quiz(course_id):
+    if 'admin' in session:
+        course = Course.query.get(course_id)
+        
+        quiz = Quiz(course_id=course_id)
+        for i in range(20):
+            question_content = request.form.get(f'question_{i+1}')
+            question = Question(content=question_content, quiz=quiz)
+            
+            for j in range(4):
+                option_content = request.form.get(f'option_{i+1}_{j+1}')
+                is_correct = (j == 0)  # Set the first option as correct
+                
+                option = Option(content=option_content, is_correct=is_correct, question=question)
+                db.session.add(option)
+            db.session.add(question)
+        
+        db.session.add(quiz)
+        db.session.commit()
+        
+        flash('Quiz added successfully.', 'success')
+        return redirect('/admin-dashboard')
+    else:
+        return redirect('/admin-login')
+
+
+@app.route('/admin-dashboard/edit-quizzes')
+def edit_quizzes():
+    if 'admin' in session:
+        quizzes = Quiz.query.all()
+        return render_template('edit_quizzes.html', quizzes=quizzes)
+    else:
+        return redirect('/admin-login')
+
+
+@app.route('/admin-dashboard/edit-quiz/<int:quiz_id>', methods=['GET', 'POST'])
+def edit_quiz(quiz_id):
+    if 'admin' in session:
+        quiz = Quiz.query.get(quiz_id)
+
+        if request.method == 'POST':
+            # Update the quiz details
+            quiz.course_id = request.form.get('course_id', quiz.course_id)
+
+            # Retrieve the existing questions and options
+            existing_questions = quiz.questions
+            existing_options = Option.query.filter(Option.question_id.in_([question.id for question in existing_questions]))
+
+            # Update the existing questions and options
+            for question in existing_questions:
+                question_content = request.form.get(f'question_{question.id}')
+                if question_content is not None:
+                    question.content = question_content
+
+            for option in existing_options:
+                option_content = request.form.get(f'option_{option.question_id}_{option.id}')
+                is_correct = request.form.get(f'correct_option_{option.question_id}')
+                if option_content is not None and is_correct is not None:
+                    option.content = option_content
+                    option.is_correct = (option.id == int(is_correct))
+
+            # Add new questions and options
+            for i in range(1, 21):
+                new_question_content = request.form.get(f'new_question_{i}')
+                if new_question_content:
+                    new_question = Question(content=new_question_content, quiz=quiz)
+
+                    for j in range(1, 5):
+                        new_option_content = request.form.get(f'new_option_{i}_{j}')
+                        new_correct_option = request.form.get(f'new_correct_option_{i}')
+                        if new_option_content:
+                            is_correct = (j == int(new_correct_option)) if new_correct_option else False
+                            new_option = Option(content=new_option_content, is_correct=is_correct, question=new_question)
+                            db.session.add(new_option)
+
+                    db.session.add(new_question)
+
+            db.session.commit()
+
+            flash('Quiz updated successfully!', 'success')
+            return redirect('/admin-dashboard/edit-quizzes')
+
+        return render_template('edit_quiz.html', quiz=quiz)
+    else:
+        return redirect('/admin-login')
+
+
+@app.route('/admin-dashboard/delete-quiz/<int:quiz_id>', methods=['GET'])
+def delete_quiz(quiz_id):
+    if 'admin' in session:
+        quiz = Quiz.query.get(quiz_id)
+        if quiz:
+            db.session.delete(quiz)
+            db.session.commit()
+            flash('Quiz deleted successfully!', 'success')
+            return redirect('/admin-dashboard/edit-quizzes')
+        else:
+            flash('Quiz not found.', 'error')
+
+        return redirect('/admin-dashboard/edit-quizzes')
+    else:
+        return redirect('/admin-login')
+
+
+
+
+
+
+
+@app.route('/admin/view-applications')
+def view_applications():
+    if 'admin' in session:
+        courses = Course.query.all()
+        return render_template('view_applications.html', courses=courses)
+    else:
+        return redirect('/admin-login')
+
+
+@app.route('/admin/view-applications/<int:course_id>')
+def view_course_applications(course_id):
+    if 'admin' in session:
+        course = Course.query.get(course_id)
+        if course:
+            applications = course.applications
+            return render_template('view_course_applications.html', course=course, applications=applications)
+        else:
+            flash('Course not found.', 'error')
+            return redirect('/admin/view-applications')
+    else:
+        return redirect('/admin-login')
+
+
+@app.route('/admin/accept-application/<int:application_id>', methods=['POST'])
+def accept_application(application_id):
+    if 'admin' in session:
+        application = Application.query.get(application_id)
+        if application:
+            # Update the application status to "Paid"
+            application.status = 'Paid'
+            db.session.commit()
+            
+            # Send an email to the user
+            send_acceptance_email(application.user)
+
+            flash('Application accepted successfully!', 'success')
+            return redirect(url_for('view_course_applications', course_id=application.course_id))
+        else:
+            flash('Application not found.', 'error')
+            return redirect(url_for('view_applications'))
+    else:
+        return redirect('/admin-login')
+
+
+def send_acceptance_email(user):
+    msg = Message('Application Accepted', sender=recipient, recipients=[user.email])
+    msg.html = render_template('acceptance_email.html', user=user)
+    mail.send(msg)
+
+
+
+
+@app.route('/admin/delete-application/<int:application_id>', methods=['POST'])
+def delete_application(application_id):
+    if 'admin' in session:
+        application = Application.query.get(application_id)
+        if application:
+            # Update the application status to "Cancelled"
+            application.status = 'Cancelled'
+            db.session.commit()
+            flash('Application deleted successfully!', 'success')
+
+            # Get the course ID before redirecting
+            course_id = application.course_id
+
+            # Retrieve the updated list of applications
+            course = Course.query.get(course_id)
+            applications = course.applications
+
+            return redirect(url_for('view_course_applications', course_id=course_id, applications=applications))
+        else:
+            flash('Application not found.', 'error')
+            return redirect(url_for('view_applications'))
+    else:
+        return redirect('/admin-login')
+
+
+@app.route('/application_success')
+def application_success():
+    return render_template('application_success.html')
+
+
+@app.route('/apply-now/<int:course_id>', methods=['GET', 'POST'])
+@login_required
+def apply_now(course_id):
+    # Retrieve the course details based on the course_id
+    course = Course.query.get(course_id)
+    user = current_user
+
+    if user in course.registered_users:
+        flash('You have already registered for this course.', 'warning')
+        return redirect(url_for('dashboard'))
+
+
+    if request.method == 'POST':
+        # Check if the user has already applied for this course
+        existing_application = Application.query.filter_by(user_id=user.id, course_id=course.id).first()
+        if existing_application:
+            flash('You have already submitted an application for this course.', 'warning')
+            return redirect(url_for('dashboard'))
+
+        return redirect(url_for('application_form', course_id=course_id))
+
+    return render_template('apply_now.html', course=course, user=user)
+
+
+@app.route('/application-form/<int:course_id>', methods=['GET', 'POST'])
+@login_required
+def application_form(course_id):
+    # Retrieve the course details based on the course_id
+    course = Course.query.get(course_id)
+    user = current_user
+
+    # Get a list of all countries
+    countries = list(pycountry.countries)
+
+    if request.method == 'POST':
+        # Retrieve the application form data
+        phone = request.form.get('phone')
+        country_code = request.form.get('country')
+        state = request.form.get('state')
+        education = request.form.get('education')
+        skills = request.form.get('skills')
+        time = request.form.get('time')
+        motivation = request.form.get('motivation')
+
+        # Get the country name from the country code
+        country = None
+        for c in countries:
+            if c.alpha_2 == country_code:
+                country = c.name
+                break
+
+        # Create a new application object
+        application = Application(
+            user_id=user.id,
+            course_id=course.id,
+            phone=phone,
+            country=country,
+            state=state,
+            education=education,
+            skills=skills,
+            time=int(time),
+            motivation=motivation,
+            status='Pending'
+        )
+
+        # Add the application to the database
+        db.session.add(application)
+        db.session.commit()
+
+        # Redirect to the application success page
+        return redirect(url_for('application_success'))
+
+    return render_template('application_form.html', course=course, user=user, countries=countries)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# TODO 
+
+# @app.route('/quiz/<int:course_id>', methods=['GET', 'POST'])
+# def quiz(course_id):
+#     # Retrieve the course details based on the course_id
+#     course = Course.query.get(course_id)
+#     quiz = course.quizzes[0]  # Assuming each course has only one quiz
+
+#     # Retrieve the quiz questions for the course
+#     questions = quiz.questions
+#     num_questions = len(questions)
+
+#     # Shuffle the options for each question
+#     for question in questions:
+#         random.shuffle(question.options)
+
+#     # Get the current question index from the session or set it to 0
+#     current_question_index = session.get('current_question_index', 0)
+
+#     if request.method == 'POST':
+#         # Handle form submission if needed
+#         user_answers = {}
+
+#         for question in questions:
+#             user_answer = request.form.get(f'question_{question.id}')
+#             user_answers[question.id] = user_answer
+
+#         # Store the user's answers in the session
+#         session['user_answers'] = user_answers
+
+#         if 'submit' in request.form:
+#             # Submit the quiz and calculate the score
+#             score = 0
+
+#             for question in questions:
+#                 user_answer = user_answers[question.id]
+#                 correct_option_id = question.options[0].id
+
+#                 if user_answer == str(correct_option_id):
+#                     score += 1
+
+#             # Calculate the overall grade as a percentage
+#             overall_grade = (score / num_questions) * 100
+
+#             # Render the quiz result page with the user's score and overall grade
+#             return render_template('quiz_result.html', score=score, overall_grade=overall_grade)
+
+#         elif 'next' in request.form:
+#             # Move to the next question
+#             current_question_index += 1
+
+#             if current_question_index == num_questions - 1:
+#                 # On the last question, change the button text to "Submit"
+#                 next_button_text = 'Submit'
+#             else:
+#                 next_button_text = 'Next'
+
+#             # Update the current question index in the session
+#             session['current_question_index'] = current_question_index
+
+#             # Render the quiz page with the next question
+#             return render_template('quiz.html', course=course, quiz=quiz, questions=questions,
+#                                    num_questions=num_questions, current_question_index=current_question_index,
+#                                    next_button_text=next_button_text)
+
+#         elif 'prev' in request.form:
+#             # Move to the previous question
+#             if current_question_index > 0:
+#                 current_question_index -= 1
+#             else:
+#                 current_question_index = 0
+
+#             if current_question_index == num_questions - 1:
+#                 # When going back from the last question, change the button text back to "Next"
+#                 next_button_text = 'Next'
+#             else:
+#                 next_button_text = 'Submit' if current_question_index == num_questions - 1 else 'Next'
+
+#             # Update the current question index in the session
+#             session['current_question_index'] = current_question_index
+
+#             # Render the quiz page with the previous question
+#             return render_template('quiz.html', course=course, quiz=quiz, questions=questions,
+#                                    num_questions=num_questions, current_question_index=current_question_index,
+#                                    next_button_text=next_button_text)
+
+#     else:
+#         # Reset the session variables when starting a new quiz
+#         session['current_question_index'] = 0
+#         session['user_answers'] = {}
+
+#     # Render the quiz page with the first question
+#     return render_template('quiz.html', course=course, quiz=quiz, questions=questions,
+#                            num_questions=num_questions, current_question_index=0, next_button_text='Next')
+
+
+@app.route('/quiz-instructions/<int:course_id>', methods=['GET', 'POST'])
+def quiz_instructions(course_id):
+    if request.method == 'POST':
+        return redirect(url_for('quiz', course_id=course_id))
+
+    course = Course.query.get(course_id)
+    return render_template('quiz_instructions.html', course=course)
+
+
+# TODO
+
 
 
 @app.route('/logout')
@@ -566,9 +1050,6 @@ def logout():
     session.pop('admin', None)
     flash('You have been logged out.', 'success')
     return redirect('/admin-login')
-
-
-
 
 
 

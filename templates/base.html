@@ -1,7 +1,4 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
--->
+
 <!doctype html>
 <html lang="en">
 
@@ -70,10 +67,18 @@ Author URL: http://w3layouts.com
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('courses_page') }}">Courses</a>
                         </li>
-                       
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('blogs_page') }}">Blogs</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('contact_page') }}">Contact</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-primary" href="{{ url_for('login_page') }}">Login</a>
+                        </li>
+
+                        
                     </ul>
                 </div>
                 <!-- toggle switch for light and dark theme -->
@@ -132,7 +137,7 @@ Author URL: http://w3layouts.com
                             <li><a href="{{ url_for('about_page') }}">About Us</a></li>
                             <li><a href="{{ url_for('courses_page') }}">Courses</a></li>
                             <li><a href="#pricing"> Donate to Us</a></li>
-                            <li><a href="#careers"> Terms and Condition</a></li>
+                            <li><a href="{{ url_for('terms_page') }}"> Terms and Condition</a></li>
                             <li><a href="{{ url_for('blogs_page') }}"> Blog posts</a></li>
                             <li><a href="{{ url_for('contact_page') }}">Contact us</a></li>
                         </ul>

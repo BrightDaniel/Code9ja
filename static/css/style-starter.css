@@ -18665,3 +18665,88 @@ a.blog-desc1:hover {
     .loginbttm {
         padding: 0px;
     }
+
+
+    /* My styles */
+
+    
+.container > p{
+  font-size: 32px;
+}
+.question{
+  width: 75%;
+}
+
+.question h3 {
+  font-weight: bold;
+  
+  padding: 0.5rem;
+  border: 2px solid #799efe;
+  border-radius: 0.5rem;
+
+}
+.options{
+  position: relative;
+  padding-left: 40px;
+}
+#options label{
+  display: block;
+  margin-bottom: 15px;
+  font-size: 25px;
+  cursor: pointer;
+}
+.options input{
+  opacity: 0;
+}
+.checkmark {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #555;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+}
+.options input:checked ~ .checkmark:after {
+  display: block;
+}
+.options .checkmark:after{
+  content: "";
+width: 10px;
+  height: 10px;
+  display: block;
+background: white;
+  position: absolute;
+  top: 50%;
+left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%,-50%) scale(0);
+  transition: 300ms ease-in-out 0s;
+}
+.options input[type="radio"]:checked ~ .checkmark{
+  background: #21bf73;
+  transition: 300ms ease-in-out 0s;
+}
+.options input[type="radio"]:checked ~ .checkmark:after{
+  transform: translate(-50%,-50%) scale(1);
+}
+/* .btn-primary{
+  background-color: #555;
+  color: #ddd;
+  border: 1px solid #ddd;
+}
+.btn-primary:hover{
+  background-color: #21bf73;
+  border: 1px solid #21bf73;
+}
+.btn-success{
+  padding: 5px 25px;
+  background-color: #21bf73;
+} */
+@media(max-width:576px){
+  .question{
+      width: 100%;
+      word-spacing: 2px;
+  } 
+}

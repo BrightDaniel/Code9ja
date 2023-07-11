@@ -1,4 +1,120 @@
-<h1>Welcome, {{ user.first_name }}!</h1>
+{% extends 'user_dashboard_base.html' %}
+
+
+{% block content %}
+
+<div class="app-wrapper">
+	    
+    <div class="app-content pt-3 p-md-3 p-lg-4">
+        <div class="container-xl">
+            
+            <h1 class="app-page-title">Your Area</h1>
+            
+            <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration">
+                <div class="inner">
+                    <div class="app-card-body p-3 p-lg-4">
+                        <!-- <h3 class="mb-3">Hello {{ user.first_name }}!</h3> -->
+                        <div class="row gx-5 gy-3">
+                            <div class="col-12 col-lg-9">
+                                {% if applications %}
+                                    {% for application in applications %}
+                                        <div class="notification">
+                                            {% if application.status == 'Pending' %}
+                                                <h3>Fingers Crossed. We want make you wait for next update, {{ user.first_name }}!</h3>
+                                                <p>Your application dey for pending, but no worry, our team go soon review am.</p>
+                                            {% elif application.status == 'Paid' %}
+                                                <h3>Great News For You, {{ user.first_name }}!</h3>
+                                                <p>This wan na better news oh. We don accept your application. Check your email for more details and see you in class.</p>
+                                            {% elif application.status == 'Cancelled' %}
+                                                <h3>We are sorry to inform you, {{ user.first_name }}.</h3>
+                                                <p>Chai, We no fit accept Your application this time. The matter really tire us. but if you feel say we no suppose reject the application, abeg send us <a href="{{ url_for('contact_page')}}">Message</a> make we look the matter well again.</p>
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="notification">
+                                        <h3>No applications found.</h3>
+                                        <p>You never apply for any course oo. Abeg go see our course for <a href="{{ url_for('courses_page')}}">courses page</a> </p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+            
+
+
+            <div class="row g-3 mb-4 align-items-center justify-content-between">
+                <div class="col-auto">
+                    <h1 class="app-page-title mb-0">Courses Wey you don apply for</h1>
+                </div>
+             
+            </div><!--//row-->
+           
+            
+            <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+                <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">All the course dem</a>
+               
+            </nav>
+            
+            <div class="tab-content" id="orders-table-tab-content">
+                <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+                    <div class="app-card app-card-orders-table shadow-sm mb-5">
+                        <div class="app-card-body">
+                            <div class="table-responsive">
+                                <table class="table app-table-hover mb-0 text-left">
+                                    <thead>
+                                        <tr>
+                                            <th class="cell">Deadline to Register</th>
+                                            <th class="cell">Course Name</th>
+                                            <th class="cell">Start Date</th>
+                                            <th class="cell">Date of Application</th>
+                                            <th class="cell">Status</th>
+                                            <th class="cell">Fees</th>
+                                            <th class="cell">Scholarship details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for application in applications %}
+                                        <tr>
+                                            <td class="cell">{{ application.course.deadline_date }}</td>
+                                            <td class="cell">{{ application.course.title }}</td>
+                                            <td class="cell">{{ application.course.start_date }}</td>
+                                            <td class="cell">{{ datetime.now().strftime("%d %b") }}</td>
+                                            <td class="cell">
+                                                {% if application.status == 'Pending' %}
+                                                    <span class="badge bg-warning">Pending</span>
+                                                {% elif application.status == 'Paid' %}
+                                                    <span class="badge bg-success">Paid</span>
+                                                {% elif application.status == 'Cancelled' %}
+                                                    <span class="badge bg-danger">Cancelled</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="cell">${{ application.course.cost }}</td>
+                                            <td class="cell"><a class="btn-sm app-btn-secondary" href="#">Full Scholarship</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    
+                                    </tbody>
+                                </table>
+                            </div><!--//table-responsive-->
+                        </div><!--//app-card-body-->       
+                    </div><!--//app-card-->
+                </div><!--//tab-pane-->
+                
+              
+            </div><!--//tab-content-->
+            
+            
+            
+
+
+            </div>
+            </div>
+
+<!-- <h1>Welcome, {{ user.first_name }}!</h1>
 
 {% if registered_courses %}
     <h3>Your Registered Courses:</h3>
@@ -11,4 +127,6 @@
     <p>No courses registered yet. <a href="/courses">Go to courses</a></p>
 {% endif %}
 
-<a href="/user-logout">Logout</a>
+<a href="/user-logout">Logout</a> -->
+
+{% endblock %}

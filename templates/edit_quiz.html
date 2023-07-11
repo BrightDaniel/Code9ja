@@ -1,0 +1,47 @@
+{% extends 'dashboard_base.html' %}
+
+{% block title %}
+    Admin Dashboard || Add Blog
+{% endblock %}
+
+{% block content %}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+  <h1 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Edit Quiz</h1>
+
+  <form action="{{ url_for('edit_quiz', quiz_id=quiz.id) }}" method="POST">
+    <h2 class="fw-normal mt-5 mb-3" style="letter-spacing: 1px;">Existing Questions</h2>
+    <div class="form-group">
+        <label>Course Title</label>
+        <input type="text" class="form-control" value="{{ quiz.course.title }}" readonly>
+    </div>
+
+    <div class="form-group">
+        <label>Course ID</label>
+        <input type="text" class="form-control" name="course_id" value="{{ quiz.course.id }}" required readonly>
+    </div>
+
+    {% for question in quiz.questions %}
+        <div class="form-group">
+            <label for="question_{{ question.id }}">Question {{ loop.index }}</label>
+            <input type="text" class="form-control" id="question_{{ question.id }}" name="question_{{ question.id }}" value="{{ question.content }}" required>
+        </div>
+
+        <h5 class="fw-normal">Options</h5>
+        {% for option in question.options %}
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="correct_option_{{ question.id }}" value="{{ option.id }}" {% if option.is_correct %}checked{% endif %}>
+                <label class="form-check-label" for="correct_option_{{ question.id }}_{{ option.id }}">Option {{ loop.index }}</label>
+                <input type="text" class="form-control" id="correct_option_{{ question.id }}_{{ option.id }}" name="option_{{ question.id }}_{{ option.id }}" value="{{ option.content }}" required>
+            </div>
+        {% endfor %}
+        <hr>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary mt-4">Update Quiz</button>
+</form>
+
+
+
+{% endblock %}

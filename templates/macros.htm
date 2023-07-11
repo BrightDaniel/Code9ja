@@ -1,0 +1,6 @@
+{% macro bootstrap_input(name, label, required) %}
+    <div class="form-group">
+        <label for="{{ name }}">{{ label }}</label>
+        <input type="text" id="{{ name }}" name="{{ name }}" class="form-control mb-2" {% if required %}required{% endif %}>
+    </div>
+{% endmacro %}

@@ -1,0 +1,25 @@
+{% extends 'dashboard_base.html' %}
+
+{% block title %}
+    Admin Dashboard || Add Blog
+{% endblock %}
+
+{% block content %}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+  <h1 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Add Quiz</h1>
+
+  {% for course in courses %}
+    <div class="card mb-3">
+      <div class="card-header">{{ course.title }}</div>
+      <div class="card-body">
+        <p>Course Details: {{ course.title }}, {{ course.duration }}, {{ course.cost }}</p>
+        <a href="{{ url_for('create_quiz', course_id=course.id) }}" class="btn btn-primary">Add Quiz</a>
+      </div>
+    </div>
+    </div>
+    </main>
+    </div>
+  {% endfor %}
+{% endblock %}

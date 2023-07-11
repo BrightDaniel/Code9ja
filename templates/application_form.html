@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %} Code 9ja - Learn about{% endblock %}
+
+{% block keywords %}Keywords specific to this page{% endblock %}
+
+{% block description %}Description specific to this page{% endblock %}
+
+{% block author %}Author Name{% endblock %}
+
+{% block content %}
+
+    <div class="inner-banner">
+        <section class="w3l-breadcrumb">
+        </section>
+    </div>
+   
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col col-xl-10">
+            <div class="" style="border-radius: 1rem;">
+              <div class="row g-0">
+      
+                <div class="col-md-12 col-lg-12 d-flex align-items-center">
+                    <div class="card-body p-4 p-lg-5 text-black">
+                
+                        <h1 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Apply Now for {{ course.title }} Course</h1>
+                
+                        <div class="card-body p-4 p-lg-5 text-black col-lg-12">
+                            <form action="{{ url_for('application_form', course_id=course.id) }}" method="POST">
+                                <div class="form-group">
+                                    <label for="phone">Phone Number:</label>
+                                    <input class="form-control" type="number" id="phone" name="phone" pattern="[+0-9]+" placeholder="+234 number" required>
+                                </div>
+                            
+                                <div class="form-group">
+                                    <label for="country">Country Of Residence:</label>
+                                    <select class="form-control" id="country" name="country" required>
+                                        <option value="" disabled selected>Select your country</option>
+                                        {% for country in countries %}
+                                            <option value="{{ country.alpha_2 }}">{{ country.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            
+                                <div class="form-group">
+                                    <label for="state">State:</label>
+                                    <input class="form-control" type="text" id="state" name="state" required>
+                                </div>
+                            
+                                <div class="form-group">
+                                    <label for="education">Level of Education:</label>
+                                    <select class="form-control" id="education" name="education" required>
+                                        <option value="" disabled selected>Tell us about your education</option>
+                                        <option value="High School certificate">High School certificate</option>
+                                        <option value="Bachelors Degree">Bachelors Degree</option>
+                                        <option value="Masters Degree">Masters Degree</option>
+                                        <option value="Higher than the above options">Higher than the above options</option>
+                                    </select>
+                                </div>
+                            
+                                <div class="form-group">
+                                    <label for="skills">Technical Skills:</label>
+                                    <select class="form-control" id="skills" name="skills" required>
+                                        <option value="" disabled selected>You get experience for this course before:</option>
+                                        <option value="Beginner">No experience</option>
+                                        <option value="Intermediate Skills">Small experience</option>
+                                        <option value="Advanced Skills">I be expert</option>
+                                    </select>
+                                </div>
+                            
+                                <div class="form-group">
+                                    <label for="time">How much time you go fit give for this course:</label>
+                                    <input class="form-control" type="number" id="time" name="time" min="1" max="50" required>
+                                </div>
+                            
+                                <div class="form-group">
+                                    <label for="motivation">Tell us wetin you want achieve as you dey learn this course:</label>
+                                    <textarea class="form-control" id="motivation" name="motivation" required></textarea>
+                                </div>
+                            
+                                <div class="d-flex justify-content-center">
+                                    <button class="btn btn-dark btn-lg" type="submit">Submit Application</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+
+    {% endblock %}
+    
+    <!-- /contact1 -->
+

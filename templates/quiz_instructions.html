@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Quiz Instructions</h1>
+  
+  <p>Thank you for applying for the course. To complete the registration process, you need to complete a quiz. The quiz is timed for 30 minutes, and you need to score 70% or more to qualify.</p>
+  
+  <form action="{{ url_for('quiz_instructions') }}" method="POST">
+    <input type="hidden" name="course_id" value="{{ course_id }}">
+    <button type="submit" class="btn btn-primary">Start Quiz</button>
+  </form>
+{% endblock %}

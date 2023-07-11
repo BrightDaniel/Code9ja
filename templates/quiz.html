@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %} Code 9ja - Learn about{% endblock %}
+
+{% block keywords %}Keywords specific to this page{% endblock %}
+
+{% block description %}Description specific to this page{% endblock %}
+
+{% block author %}Author Name{% endblock %}
+
+{% block content %}
+
+    <div class="inner-banner">
+        <section class="w3l-breadcrumb">
+            <div class="container">
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span> Contact</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <!-- about page about section -->
+    <!-- contact1 -->
+    <!-- <section class=""> 
+<div class="container mt-sm-5 my-1">
+    <div class="text-right">
+        Time
+    </div>
+    <div class="question ml-sm-5 pl-sm-5 pt-2">
+        <div class="py-2 h5 mb-5 mt-5"><h3>Q. which option best describes your job role?</h3></div>
+        <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3 mb-4" id="options">
+            <label class="options">Small Business Owner or Employee
+                <input type="radio" name="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="options">Nonprofit Owner or Employee
+                <input type="radio" name="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="options">Journalist or Activist
+                <input type="radio" name="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="options">Other
+                <input type="radio" name="radio">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </div>
+    <div class="d-flex align-items-center pt-3 mt-4 mb-4">
+        <div id="prev">
+            <button class="btn btn-primary">Previous</button>
+        </div>
+        <div class="ml-auto mr-sm-5">
+            <button class="btn btn-success">Next</button>
+        </div>
+    </div>
+</div>
+
+<style>
+
+</style>
+
+</section> -->
+
+<section>
+    <div class="container mt-sm-5 my-1">
+        <div class="text-right">
+            <span id="timer">30:00</span> <!-- Timer display -->
+        </div>
+        
+        <form action="{{ url_for('quiz', course_id=course.id) }}" method="POST" id="quiz-form">
+            {% set current_question = questions[current_question_index] %}
+            <div class="question ml-sm-5 pl-sm-5 pt-2">
+                <div class="py-2 h5 mb-5 mt-5">
+                    <h3>Q. {{ current_question.content }}</h3>
+                </div>
+                <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3 mb-4" id="options">
+                    {% for option in current_question.options %}
+                    <label class="options">{{ option.content }}
+                        <input type="radio" name="question_{{ current_question.id }}" value="{{ option.id }}"
+                            {% if session['user_answers'].get(current_question.id) == option.id|string %} checked {% endif %}>
+                        <span class="checkmark"></span>
+                    </label>
+                {% endfor %}
+                
+                </div>
+            </div>
+            <div class="d-flex align-items-center pt-3 mt-4 mb-4">
+                <div id="prev">
+                    <button type="submit" class="btn btn-primary" name="prev" id="prev-btn" {% if current_question_index == 0 %} disabled {% endif %}>
+                        Previous
+                    </button>
+                </div>
+                <div class="ml-auto mr-sm-5">
+                    {% if current_question_index == num_questions - 1 %}
+                        <button type="submit" class="btn btn-success" name="submit" id="submit-btn">Submit</button>
+                    {% else %}
+                        <button type="submit" class="btn btn-success" name="next" id="next-btn">Next</button>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+        
+
+    </div>
+</section>
+
+
+<script>
+    // Timer function to count down from 30 minutes
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+
+        var timerInterval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                clearInterval(timerInterval);
+                document.getElementById('quiz-form').submit(); // Submit the form when the timer expires
+            }
+        }, 1000);
+    }
+
+    // Get the total duration of the quiz in seconds (30 minutes)
+    var totalDuration = 30 * 60;
+    var timerDisplay = document.getElementById('timer');
+    startTimer(totalDuration, timerDisplay);
+
+    // Enable/disable previous button based on current question index
+    var prevButton = document.getElementById('prev-btn');
+    prevButton.disabled = true;
+    var currentQuestionIndex = 0;
+    var questionsCount = parseInt("{{ num_questions }}", 10);
+
+    function updatePrevButton() {
+        if (currentQuestionIndex === 0) {
+            prevButton.disabled = true;
+        } else {
+            prevButton.disabled = false;
+        }
+    }
+
+    // Update question index and button states when next button is clicked
+    document.getElementById('next-btn').addEventListener('click', function () {
+        currentQuestionIndex++;
+
+        if (currentQuestionIndex === questionsCount - 1) {
+            // Change button text to "Submit" on the last question
+            document.getElementById('next-btn').style.display = 'none';
+            document.getElementById('submit-btn').style.display = 'block';
+        }
+
+        updatePrevButton();
+    });
+
+    // Update question index and button states when previous button is clicked
+    document.getElementById('prev-btn').addEventListener('click', function () {
+        currentQuestionIndex--;
+
+        if (currentQuestionIndex === questionsCount - 2) {
+            // Change button text back to "Next" when going back from the last question
+            document.getElementById('next-btn').style.display = 'block';
+            document.getElementById('submit-btn').style.display = 'none';
+        }
+
+        updatePrevButton();
+    });
+</script>
+
+
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'dashboard_base.html' %}
+
+{% block content %}
+<div id="layoutSidenav_content">
+    <main>
+    <div class="container-fluid px-4">
+  <h1>Applications for {{ course.title }}</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">User</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Country</th>
+        <th scope="col">State</th>
+        <th scope="col">Education</th>
+        <th scope="col">Skills</th>
+        <th scope="col">Time</th>
+        <th scope="col">Motivation</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for application in applications %}
+      <tr>
+        <td>{{ application.user.first_name }} {{ application.user.last_name }}</td>
+        <td>{{ application.phone }}</td>
+        <td>{{ application.country }}</td>
+        <td>{{ application.state }}</td>
+        <td>{{ application.education }}</td>
+        <td>{{ application.skills }}</td>
+        <td>{{ application.time }}</td>
+        <td>{{ application.motivation }}</td>
+        <td>
+          <form action="{{ url_for('accept_application', application_id=application.id) }}" method="POST">
+            <button type="submit" class="btn btn-success">Accept Application</button>
+          </form>
+          <form action="{{ url_for('delete_application', application_id=application.id) }}" method="POST">
+            <button type="submit" class="btn btn-danger">Delete Application</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+</div>
+</main>
+
+
+{% endblock %}

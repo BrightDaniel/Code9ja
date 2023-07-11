@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Application Accepted</title>
+  </head>
+  <body>
+    <h2>Congratulations! 🎉</h2>
+<p>Dear {{ user.first_name }},</p>
+<p>We are pleased to inform you that your application for the "{{ user.applications[0].course.title }}" course has been accepted. This is a big achievement! 🎓</p>
+<p>As a reminder, here is your motivation statement:</p>
+"<blockquote>{{ user.applications[0].motivation }}</blockquote>"
+<p>We believe in your potential and look forward to seeing you succeed and fulfill your aspirations. The scholarship providers who made this opportunity possible are eagerly waiting to see how you will perform. 💪</p>
+<p>In the week before the class starts, we will send you more details about the course via email.</p>
+<p>Best regards,</p>
+<p>C0de9ja</p>
+
+  </body>
+</html>

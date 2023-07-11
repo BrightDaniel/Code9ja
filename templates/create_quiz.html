@@ -1,0 +1,26 @@
+{% extends 'dashboard_base.html' %}
+
+{% block title %}
+    Admin Dashboard || Add Blog
+{% endblock %}
+
+{% block content %}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+  <h1 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Create Quiz for {{ course.title }}</h1>
+  
+  <form action="{{ url_for('save_quiz', course_id=course.id) }}" method="POST">
+    {% for i in range(1, 21) %}
+      <h4>Question {{ i }}</h4>
+      <textarea name="question_{{ i }}" class="form-control mb-3" rows="3" required></textarea>
+      
+      <h5>Options:</h5>
+      {% for j in range(1, 5) %}
+        <input type="text" name="option_{{ i }}_{{ j }}" class="form-control mb-2" required>
+      {% endfor %}
+    {% endfor %}
+    
+    <button type="submit" class="btn btn-primary">Save Quiz</button>
+  </form>
+{% endblock %}
