@@ -882,16 +882,6 @@ def application_form(course_id):
 
 
 
-
-
-
-
-
-
-
-
-
-
 # TODO 
 
 # @app.route('/quiz/<int:course_id>', methods=['GET', 'POST'])
