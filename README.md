@@ -169,7 +169,7 @@ Here are some screenshots of key pages within the Code9ja platform:
 
 ## Authors and Credits
 
-Code9ja is developed by [Bright Daniel]. We would like to express our gratitude to the open-source community and peers for their valuable contributions and support in making Code9ja a reality.
+Code9ja is developed by [Bright Daniel](https://github.com/BrightDaniel). We would like to express our gratitude to the open-source community and peers for their valuable contributions and support in making Code9ja a reality.
 
 ## Contributing
 
